@@ -8,3 +8,40 @@
   height: 100px;
   width: 100px;
 }
+
+.nav-bar {
+  padding-left: 10px;
+}
+
+.main-image {
+}
+
+.social-buttons {
+  display: flex;
+  margin-right: 10px;
+  font-size: 25px;
+}
+
+.button1 {
+  margin-right: 20px;
+}
+
+.button2 {
+  margin-right: 20px;
+}
+
+.button3 {
+  margin-right: 20px;
+}
+
+.text-section {
+}
+
+.text-home {
+  font-family: 'Courgette', cursive;
+  text-align: center;
+  font-size: 25px;
+  font-weight: 500;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
