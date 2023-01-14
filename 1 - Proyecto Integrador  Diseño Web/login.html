@@ -56,7 +56,7 @@
               <a class="nav-link" href="imagenes.html">Imagenes</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="contacto.html">Contacto</a>
+              <a class="nav-link active" href="contacto.html">Contacto</a>
             </li>
             <li class="nav-item dropdown">
               <a
@@ -69,9 +69,7 @@
                 Usuarios
               </a>
               <ul class="dropdown-menu">
-                <li>
-                  <a class="dropdown-item active" href="login.html">Login</a>
-                </li>
+                <li><a class="dropdown-item" href="login.html">Login</a></li>
                 <li>
                   <a class="dropdown-item" href="registrarse.html"
                     >Registrarse</a
@@ -83,22 +81,71 @@
           </ul>
           <div class="social-buttons">
             <div class="button1">
-              <a href=""><i class="fa-brands fa-facebook"></i></a>
+              <a
+                href="https://www.facebook.com/Burguer-House-El-Socorro"
+                target="_blank"
+                ><i class="fa-brands fa-facebook"></i
+              ></a>
             </div>
             <div class="button2">
-              <a href=""><i class="fa-brands fa-instagram"></i></a>
+              <a
+                href="https://www.instagram.com/burguerhouseelsocorro"
+                target="_blank"
+                ><i class="fa-brands fa-instagram"></i
+              ></a>
             </div>
             <div class="button3">
-              <a href=""><i class="fa-brands fa-twitter"></i></a>
+              <a
+                href="https://twitter.com/burguerhouseelsocorro"
+                target="_blank"
+                ><i class="fa-brands fa-twitter"></i
+              ></a>
             </div>
           </div>
         </div>
       </div>
     </nav>
 
-    <section>
-      <h1>login</h1>
-    </section>
+    <div class="container" id="container-login">
+      <div class="row">
+        <div class="col-12">
+          <h1 class="text-center mt-3">Login</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <form class="form-group">
+            <div class="row">
+              <div class="col-12">
+                <label for="email" class="form-label">Email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  placeholder="Ingrese su email"
+                />
+              </div>
+              <div class="col-12">
+                <label for="password" class="form-label">Contraseña</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  placeholder="Ingrese su contraseña"
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 text-center">
+                <button type="submit" class="btn btn-primary mt-3 mb-5">
+                  Entrar
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
 
     <div id="footer" class="bg-dark text-center p-3 text-white">
       <p class="small">
