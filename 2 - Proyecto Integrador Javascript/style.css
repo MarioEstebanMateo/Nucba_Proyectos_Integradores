@@ -4,6 +4,11 @@
   box-sizing: border-box;
 }
 
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: gray;
+}
+
 .container-fluid {
   padding: 0;
 }
@@ -33,4 +38,64 @@
 
 .button3 {
   margin-right: 20px;
+}
+
+.title-products h2 {
+  text-align: center;
+  margin: 20px;
+}
+
+.products-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 20px;
+  gap: 20px;
+}
+
+.card {
+  border: 1px solid #000;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  min-height: 400px;
+  width: 200px;
+  background-color: #fff;
+
+}
+
+.card-img-top {
+  width: 250px;
+  height: 200px;
+  border-radius: 10px 10px 0 0;
+  margin: 10px auto;
+}
+
+.card-body {
+  padding: 10px;
+}
+
+.card-title {
+  height: 30px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.card-text {
+  font-size: 12px;
+  margin-bottom: 10px;
+  white-space: normal;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.card-price {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
 }
