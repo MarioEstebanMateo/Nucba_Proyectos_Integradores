@@ -87,8 +87,28 @@
     </nav>
 
     <section id="products">
+      <div class="main-image">
+        <img
+          src="img/mainImage.jpg"
+          class="img-fluid"
+          alt="imagen de computadora y carrito de compras"
+        />
+      </div>
       <div class="title-products">
         <h2>Nuestros Productos</h2>
+      </div>
+      <div
+        class="d-flex align-items-center justify-content-center flex-column gap-4"
+      >
+        <form class="d-flex">
+          <input
+            id="searchInput"
+            class="form-control me-1"
+            type="search"
+            placeholder="Busca tu producto"
+            aria-label="Search"
+          />
+        </form>
       </div>
       <div class="products-container"></div>
     </section>
@@ -101,6 +121,12 @@
     </div>
 
     <script src="script.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
+      integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
