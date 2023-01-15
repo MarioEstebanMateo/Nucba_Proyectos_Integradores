@@ -142,5 +142,9 @@ showAllProducts();
 const searchInput = document.getElementById("searchInput");
 searchInput.addEventListener("keyup", function () {
   document.getElementsByClassName("products-container")[0].innerHTML = "";
-  searchProduct();
+  if (searchInput.value == "") {
+    showAllProducts();
+  } else {
+    searchProduct();
+  }
 });
