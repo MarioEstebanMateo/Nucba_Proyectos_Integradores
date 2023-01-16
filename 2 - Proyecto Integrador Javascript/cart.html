@@ -50,15 +50,38 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="index.html">Home</a>
+              <a class="nav-link active" aria-current="page" href="index.html"
+                >Home</a
+              >
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="cart.html"
+              <a class="nav-link" href="cart.html"
                 ><i class="fa-solid fa-cart-shopping"></i
               ></a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="login.html">Login</a>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Usuarios
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="login.html">Login</a></li>
+                <li>
+                  <a class="dropdown-item" href="registrarse.html"
+                    >Registrarse</a
+                  >
+                </li>
+                <li>
+                  <a id="logoutButton" class="dropdown-item" href=""
+                    >Cerrar Sesion</a
+                  >
+                </li>
+              </ul>
             </li>
           </ul>
           <div class="social-buttons">
@@ -84,10 +107,31 @@
       </div>
     </nav>
 
-    <section class="cart-section">
-      <h2 class="cart-section-title">Carrito de Compras</h2>
-      <div class="cart-container"></div>
-      <div class="total-price-container"></div>
+    <section id="cart">
+      <div class="cart-container">
+        <div class="title-products">
+          <h2>Carrito de Compras</h2>
+        </div>
+        <div class="cart-table-container">
+          <table class="table table-light table-striped">
+            <thead>
+              <tr>
+                <th class="head">Image</th>
+                <th class="head">Product</th>
+                <th class="head">Price</th>
+                <th class="head">Delete Item</th>
+              </tr>
+            </thead>
+            <tbody id="tableDataRows"></tbody>
+            <div>
+              <p>
+                <strong>Total: </strong>
+                <span id="totalPrice"></span>
+              </p>
+            </div>
+          </table>
+        </div>
+      </div>
     </section>
 
     <div id="footer" class="bg-dark text-center p-3 text-white">
