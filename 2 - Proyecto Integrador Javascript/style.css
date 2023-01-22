@@ -99,3 +99,11 @@ body {
   margin-bottom: 10px;
   text-align: center;
 }
+
+.total-price-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  margin: 20px;
+}

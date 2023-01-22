@@ -140,14 +140,16 @@ const searchProduct = () => {
 showAllProducts();
 
 const searchInput = document.getElementById("searchInput");
-searchInput.addEventListener("keyup", function () {
-  document.getElementsByClassName("products-container")[0].innerHTML = "";
-  if (searchInput.value == "") {
-    showAllProducts();
-  } else {
-    searchProduct();
-  }
-});
+if (searchInput) {
+  searchInput.addEventListener("keyup", function () {
+    document.getElementsByClassName("products-container")[0].innerHTML = "";
+    if (searchInput.value == "") {
+      showAllProducts();
+    } else {
+      searchProduct();
+    }
+  });
+}
 
 // ---------------- Cart ----------------
 
@@ -159,31 +161,56 @@ if (cart == null) {
 } else {
   for (let i = 0; i < cart.length; i++) {
     let tableDataRows = document.getElementById("tableDataRows");
+    console.log(tableDataRows);
     let tableRow = document.createElement("tr");
     tableDataRows.appendChild(tableRow);
 
-    let imgRow = document.createElement("td");
-    imgRow.innerHTML = `<img src="${cart[i].image}" width="100px" height="100px">`;
-    tableRow.appendChild(imgRow);
+    let tableDataImage = document.createElement("td");
+    tableRow.appendChild(tableDataImage);
 
-    let titleRow = document.createElement("td");
-    titleRow.innerHTML = cart[i].title;
-    tableRow.appendChild(titleRow);
+    let image = document.createElement("img");
+    image.src = cart[i].image;
+    image.style.width = "50px";
+    image.style.height = "50px";
+    image.style.objectFit = "contain";
+    tableDataImage.appendChild(image);
 
-    let priceRow = document.createElement("td");
-    priceRow.innerHTML = cart[i].price;
-    tableRow.appendChild(priceRow);
+    let tableDataTitle = document.createElement("td");
+    tableDataTitle.innerHTML = cart[i].title;
+    tableRow.appendChild(tableDataTitle);
 
-    let deleteItem = document.createElement("td");
-    deleteItem.innerHTML = `<button class="btn btn-danger" onclick="deleteItem(${i})">Delete</button>`;
-    tableRow.appendChild(deleteItem);
+    let tableDataPrice = document.createElement("td");
+    tableDataPrice.innerHTML = cart[i].price;
+    tableRow.appendChild(tableDataPrice);
 
-    let total = 0;
-    for (let i = 0; i < cart.length; i++) {
-      total += cart[i].price;
-    }
-    document.getElementById("totalPrice").innerHTML = total;
+    let tableDataDelete = document.createElement("td");
+    tableRow.appendChild(tableDataDelete);
+
+    let deleteButton = document.createElement("button");
+    deleteButton.classList.add("btn", "btn-danger");
+    deleteButton.innerHTML = "Delete";
+    tableDataDelete.appendChild(deleteButton);
+
+    deleteButton.addEventListener("click", function () {
+      deleteItem(i);
+    });
   }
+
+  // calculate total price
+
+  let totalPrice = 0;
+  for (let i = 0; i < cart.length; i++) {
+    totalPrice += cart[i].price;
+  }
+  document.getElementById("totalPrice").innerHTML = totalPrice;
+
+  // clear cart
+
+  const clearCart = document.getElementById("clearCart");
+  clearCart.addEventListener("click", function () {
+    localStorage.removeItem("cart");
+    location.reload();
+  });
 }
 
 // delete item from cart
@@ -191,81 +218,5 @@ if (cart == null) {
 function deleteItem(index) {
   cart.splice(index, 1);
   localStorage.setItem("cart", JSON.stringify(cart));
-  swal("Bien!", "Producto eliminado del carrito!", "success");
   location.reload();
 }
-
-// ---------------- Register ----------------
-
-// Path: script.js
-const buttonRegister = document.getElementById("buttonRegister");
-buttonRegister.addEventListener("click", function () {
-  let users = JSON.parse(localStorage.getItem("users"));
-  if (users == null) {
-    users = [];
-  }
-
-  let user = {
-    email: document.getElementById("email").value,
-    password: document.getElementById("password").value,
-    password2: document.getElementById("password2").value,
-  };
-
-  if (user.email == "" || user.password == "") {
-    swal("Error!", "Complete todos los campos!", "error");
-  } else if (user.password.length < 8) {
-    swal("Error!", "La contraseña debe tener al menos 8 caracteres!", "error");
-  } else if (user.email.includes("@") == false) {
-    swal("Error!", "Ingrese un email válido!", "error");
-  } else if (user.password.toLowerCase == user.password2.toLowerCase) {
-    swal("Error!", "Las contraseñas no coinciden!", "error");
-  } else {
-    users.push(user);
-    localStorage.setItem("users", JSON.stringify(users));
-    swal("Bien!", "Usuario registrado!", "success");
-    console.log(users);
-  }
-});
-
-// ---------------- Login ----------------
-
-// Path: script.js
-
-const buttonLogin = document.getElementById("loginbutton");
-buttonLogin.addEventListener("click", function () {
-  let users = JSON.parse(localStorage.getItem("users"));
-  if (users == null) {
-    users = [];
-  }
-
-  let user = {
-    email: document.getElementById("email").value,
-    password: document.getElementById("password").value,
-  };
-
-  let userFound = false;
-  for (let i = 0; i < users.length; i++) {
-    if (
-      user.email.toLowerCase() == users[i].email.toLowerCase() &&
-      user.password == users[i].password
-    ) {
-      userFound = true;
-      swal("Bien!", "Usuario logueado!", "success");
-      console.log(users);
-      window.location.href = "index.html";
-    }
-  }
-  if (userFound == false) {
-    swal("Error!", "Usuario o contraseña incorrectos!", "error");
-  }
-});
-
-// ---------------- Logout ----------------
-
-// Path: script.js
-
-const buttonLogout = document.getElementById("logoutButton");
-buttonLogout.addEventListener("click", function () {
-  swal("Bien!", "Usuario deslogueado!", "success");
-  window.location.href = "index.html";
-});

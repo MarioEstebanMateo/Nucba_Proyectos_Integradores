@@ -123,13 +123,15 @@
               </tr>
             </thead>
             <tbody id="tableDataRows"></tbody>
-            <div>
-              <p>
-                <strong>Total: </strong>
-                <span id="totalPrice"></span>
-              </p>
-            </div>
           </table>
+        </div>
+      </div>
+      <div class="total-price-container">
+        <div class="total-price">
+          <h3>Total Price: $<span id="totalPrice"></span></h3>
+        </div>
+        <div>
+          <button id="clearCart" class="btn btn-danger">Clear Cart</button>
         </div>
       </div>
     </section>
@@ -141,7 +143,6 @@
       </p>
     </div>
 
-    <script src="script.js"></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
       integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
@@ -153,5 +154,6 @@
       integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
       crossorigin="anonymous"
     ></script>
+    <script src="script.js"></script>
   </body>
 </html>
