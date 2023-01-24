@@ -1,5 +1,5 @@
 const showAllProducts = () => {
-  const url = "https://fakestoreapi.com/products";
+  const url = "./productos.json";
 
   fetch(url)
     .then(function (response) {
@@ -70,7 +70,7 @@ const showAllProducts = () => {
 };
 
 const searchProduct = () => {
-  const url = "https://fakestoreapi.com/products";
+  const url = "./productos.json";
 
   fetch(url)
     .then(function (response) {
@@ -219,4 +219,29 @@ function deleteItem(index) {
   cart.splice(index, 1);
   localStorage.setItem("cart", JSON.stringify(cart));
   location.reload();
+}
+
+// ----------------- Register -----------------
+
+// get form data and save it in local storage with sweetalert2 validation and redirection to login page after 2 seconds with sweetalert2 timer function
+
+const registerForm = document.getElementById("registerForm");
+if (registerForm) {
+  registerForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    let users = JSON.parse(localStorage.getItem("users"));
+    if (users == null) {
+      users = [];
+    }
+    users.push({
+      email: document.getElementById("emailRegister").value,
+      password: document.getElementById("passwordRegister").value,
+      password2: document.getElementById("passwordRegister2").value,
+    });
+    localStorage.setItem("users", JSON.stringify(users));
+    swal("Bien!", "Usuario registrado!", "success");
+    setTimeout(function () {
+      window.location.href = "login.html";
+    }, 2000);
+  });
 }
