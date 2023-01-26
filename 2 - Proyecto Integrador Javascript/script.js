@@ -44,7 +44,7 @@ const showAllProducts = () => {
 
         let productButton = document.createElement("button");
         productButton.classList.add("btn", "btn-primary");
-        productButton.innerHTML = "Add to cart";
+        productButton.innerHTML = "Agregar al carrito";
         productBody.appendChild(productButton);
         //center productButton
         productButton.style.marginLeft = "30%";
@@ -111,7 +111,7 @@ const searchProduct = () => {
 
           let productButton = document.createElement("button");
           productButton.classList.add("btn", "btn-primary");
-          productButton.innerHTML = "Add to cart";
+          productButton.innerHTML = "Agregar al carrito";
           productBody.appendChild(productButton);
           //center productButton
           productButton.style.marginLeft = "30%";
@@ -188,7 +188,7 @@ if (cart == null) {
 
     let deleteButton = document.createElement("button");
     deleteButton.classList.add("btn", "btn-danger");
-    deleteButton.innerHTML = "Delete";
+    deleteButton.innerHTML = "Borrar";
     tableDataDelete.appendChild(deleteButton);
 
     deleteButton.addEventListener("click", function () {
@@ -223,25 +223,3 @@ function deleteItem(index) {
 
 // ----------------- Register -----------------
 
-// get form data and save it in local storage with sweetalert2 validation and redirection to login page after 2 seconds with sweetalert2 timer function
-
-const registerForm = document.getElementById("registerForm");
-if (registerForm) {
-  registerForm.addEventListener("submit", function (e) {
-    e.preventDefault();
-    let users = JSON.parse(localStorage.getItem("users"));
-    if (users == null) {
-      users = [];
-    }
-    users.push({
-      email: document.getElementById("emailRegister").value,
-      password: document.getElementById("passwordRegister").value,
-      password2: document.getElementById("passwordRegister2").value,
-    });
-    localStorage.setItem("users", JSON.stringify(users));
-    swal("Bien!", "Usuario registrado!", "success");
-    setTimeout(function () {
-      window.location.href = "login.html";
-    }, 2000);
-  });
-}
