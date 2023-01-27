@@ -223,3 +223,42 @@ function deleteItem(index) {
 
 // ----------------- Register -----------------
 
+// Register function
+function register() {
+  // Get user input
+  const emailRegister = document.getElementById("emailRegister").value;
+  const passwordRegister = document.getElementById("passwordRegisterRegister").value;
+  const passwordRegister2 = document.getElementById("passwordRegister2").value;
+  
+  // Check if username already exists in local storage
+  if (localStorage.getItem(emailRegister)) {
+    swal("Error!", "El usuario ya existe!", "error");
+    return;
+  }
+
+  // Check if passwords match
+  if (passwordRegister !== passwordRegister2) {
+    swal("Error!", "Las contraseñas no coinciden!", "error");
+    return;
+  }
+  
+  // Save user to local storage
+  localStorage.setItem(username, passwordRegister);
+  swal("Bien!", "Usuario registrado!", "success");
+}
+
+// -------------------------- Login --------------------------
+
+// Login function
+function login() {
+  // Get user input
+  const emailLogin = document.getElementById("emailLogin").value;
+  const passwordLogin = document.getElementById("passwordLogin").value;
+  
+  // Check if username and password match what's in local storage
+  if (localStorage.getItem(emailLogin) === passwordLogin) {
+    swal("Bien!", "Usuario logueado!", "success");
+  } else {
+    swal("Error!", "Usuario o contraseña incorrectos!", "error");
+  }
+}
