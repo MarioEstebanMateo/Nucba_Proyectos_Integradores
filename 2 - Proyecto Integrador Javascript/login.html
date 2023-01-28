@@ -111,7 +111,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-6 mx-auto">
-            <div class="myform form ">
+            <div class="myform form">
               <div class="logo mb-3">
                 <div class="col-md-12 text-center mt-3">
                   <h1>Login</h1>
@@ -119,21 +119,21 @@
               </div>
               <form action="" method="" name="login" id="loginForm">
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Email</label>
+                  <label for="emailLogin">Email</label>
                   <input
                     type="email"
-                    name="email"
+                    name="emailLogin"
                     class="form-control"
                     id="emailLogin"
                     aria-describedby="emailHelp"
                     placeholder="Ingrese su correo"
                   />
                 </div>
-                <div class="form-group
-                  <label for="exampleInputEmail1">Password</label>
+                <div class="form-group">
+                  <label for="passwordLogin">Password</label>
                   <input
                     type="password"
-                    name="password"
+                    name="passwordLogin"
                     id="passwordLogin"
                     class="form-control"
                     aria-describedby="emailHelp"
@@ -141,13 +141,17 @@
                   />
                 </div>
                 <div class="col-md-12 text-center pt-3 pb-3">
-                  <button class=" btn btn-block mybtn btn-primary tx-tfm" id="loginbutton">
+                  <button
+                    class="btn btn-block mybtn btn-primary tx-tfm"
+                    id="loginButton"
+                  >
                     Ingresar
                   </button>
                 </div>
                 <div>
                   <p class="text-center">
-                    No tienes una cuenta? <a href="registrarse.html">Registrate</a>
+                    No tienes una cuenta?
+                    <a href="registrarse.html">Registrate</a>
                   </p>
                 </div>
               </form>

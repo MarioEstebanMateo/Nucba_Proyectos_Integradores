@@ -227,8 +227,27 @@ if (cart == null) {
       deleteButton.innerHTML = "Borrar";
       tableDataDelete.appendChild(deleteButton);
 
+      // delete item from cart with sweetalert2 validation
       deleteButton.addEventListener("click", function () {
-        deleteItem(i);
+        swal({
+          title: "¿Estás seguro?",
+          text: "Una vez borrado, no podrás recuperar este producto!",
+          icon: "warning",
+          buttons: ["Cancelar", "Borrar"],
+          dangerMode: true,
+        }).then((willDelete) => {
+          if (willDelete) {
+            cart.splice(i, 1);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            swal("Producto borrado!", {
+              icon: "success",
+            }).then((willDelete) => {
+              if (willDelete) {
+                window.location.href = "./cart.html";
+              }
+            });
+          }
+        });
       });
     }
   }
@@ -244,13 +263,29 @@ if (document.getElementById("totalPrice")) {
   document.getElementById("totalPrice").innerHTML = totalPrice;
 }
 
-// clear cart
+// clear cart with sweetalert2 validation
 
 const clearCart = document.getElementById("clearCart");
 if (clearCart) {
   clearCart.addEventListener("click", function () {
-    localStorage.clear();
-    location.reload();
+    swal({
+      title: "¿Estás seguro?",
+      text: "Una vez borrado, no podrás recuperar tu carrito!",
+      icon: "warning",
+      buttons: ["Cancelar", "Borrar"],
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        localStorage.clear();
+        swal("Tu carrito ha sido borrado!", {
+          icon: "success",
+        }).then((willDelete) => {
+          if (willDelete) {
+            window.location.href = "./cart.html";
+          }
+        });
+      }
+    });
   });
 }
 
@@ -267,5 +302,76 @@ const seguirComprando = document.getElementById("seguirComprando");
 if (seguirComprando) {
   seguirComprando.addEventListener("click", function () {
     window.location.href = "./index.html";
+  });
+}
+
+// ---------------------- Register ----------------------
+
+// register form with local storage and sweetalert2 validation
+
+const registerForm = document.getElementById("registerForm");
+if (registerForm) {
+  registerForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+    let users = [];
+    if (localStorage.getItem("users")) {
+      users = JSON.parse(localStorage.getItem("users"));
+    }
+    let user = {
+      emailRegister: document.getElementById("emailRegister").value,
+      passwordRegister: document.getElementById("passwordRegister").value,
+      passwordRegister2: document.getElementById("passwordRegister2").value,
+    };
+    if (
+      emailRegister == "" ||
+      passwordRegister == "" ||
+      passwordRegister2 == ""
+    ) {
+      swal("Todos los campos son obligatorios");
+    } else if (passwordRegister != passwordRegister2) {
+      swal("Las contraseñas no coinciden");
+    }
+    users.push(user);
+    localStorage.setItem("users", JSON.stringify(users));
+    swal("Registro exitoso!", "Bienvenido a la tienda", "success").then(
+      (value) => {
+        window.location.href = "./login.html";
+      }
+    );
+  });
+}
+
+// ---------------------- Login ----------------------
+
+// login form with local storage and sweetalert2 validation
+
+const loginForm = document.getElementById("loginForm");
+if (loginForm) {
+  loginForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+    let users = JSON.parse(localStorage.getItem("users"));
+    let emailLogin = document.getElementById("emailLogin").value;
+    let passwordLogin = document.getElementById("passwordLogin").value;
+    if (emailLogin == "" || passwordLogin == "") {
+      swal("Todos los campos son obligatorios");
+    } else {
+      let userFound = false;
+      for (let i = 0; i < users.length; i++) {
+        if (
+          emailLogin == users[i].emailRegister &&
+          passwordLogin == users[i].passwordRegister
+        ) {
+          userFound = true;
+          swal("Bienvenido!", "Has iniciado sesión", "success").then(
+            (value) => {
+              window.location.href = "./index.html";
+            }
+          );
+        }
+      }
+      if (!userFound) {
+        swal("Usuario no encontrado");
+      }
+    }
   });
 }
