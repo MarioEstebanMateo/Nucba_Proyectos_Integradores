@@ -188,3 +188,84 @@ if (searchInput) {
 }
 
 // ---------------- Cart ----------------
+
+// show cart items from local storage in the table body
+
+let cart = JSON.parse(localStorage.getItem("cart"));
+if (cart == null) {
+  cart = [];
+} else {
+  for (let i = 0; i < cart.length; i++) {
+    let tableDataRows = document.getElementById("tableDataRows");
+    if (tableDataRows) {
+      let tableRow = document.createElement("tr");
+      tableDataRows.appendChild(tableRow);
+
+      let tableDataImage = document.createElement("td");
+      tableRow.appendChild(tableDataImage);
+
+      let image = document.createElement("img");
+      image.src = cart[i].image;
+      image.style.width = "50px";
+      image.style.height = "50px";
+      image.style.objectFit = "contain";
+      tableDataImage.appendChild(image);
+
+      let tableDataTitle = document.createElement("td");
+      tableDataTitle.innerHTML = cart[i].title;
+      tableRow.appendChild(tableDataTitle);
+
+      let tableDataPrice = document.createElement("td");
+      tableDataPrice.innerHTML = cart[i].price;
+      tableRow.appendChild(tableDataPrice);
+
+      let tableDataDelete = document.createElement("td");
+      tableRow.appendChild(tableDataDelete);
+
+      let deleteButton = document.createElement("button");
+      deleteButton.classList.add("btn", "btn-danger");
+      deleteButton.innerHTML = "Borrar";
+      tableDataDelete.appendChild(deleteButton);
+
+      deleteButton.addEventListener("click", function () {
+        deleteItem(i);
+      });
+    }
+  }
+}
+
+// calculate total price
+
+let totalPrice = 0;
+for (let i = 0; i < cart.length; i++) {
+  totalPrice += cart[i].price;
+}
+if (document.getElementById("totalPrice")) {
+  document.getElementById("totalPrice").innerHTML = totalPrice;
+}
+
+// clear cart
+
+const clearCart = document.getElementById("clearCart");
+if (clearCart) {
+  clearCart.addEventListener("click", function () {
+    localStorage.clear();
+    location.reload();
+  });
+}
+
+// delete item from cart
+
+function deleteItem(index) {
+  cart.splice(index, 1);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  location.reload();
+}
+
+// ---------- button seguir comprando ----------
+const seguirComprando = document.getElementById("seguirComprando");
+if (seguirComprando) {
+  seguirComprando.addEventListener("click", function () {
+    window.location.href = "./index.html";
+  });
+}
