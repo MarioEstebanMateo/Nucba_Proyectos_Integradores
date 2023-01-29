@@ -322,22 +322,30 @@ if (registerForm) {
       passwordRegister: document.getElementById("passwordRegister").value,
       passwordRegister2: document.getElementById("passwordRegister2").value,
     };
+    // validation for empty fields and password confirmation match with sweetalert2 validation and local storage
+
     if (
-      emailRegister == "" ||
-      passwordRegister == "" ||
-      passwordRegister2 == ""
+      user.emailRegister == "" ||
+      user.passwordRegister == "" ||
+      user.passwordRegister2 == ""
     ) {
       swal("Todos los campos son obligatorios");
-    } else if (passwordRegister != passwordRegister2) {
+    } else if (user.passwordRegister != user.passwordRegister2) {
       swal("Las contraseñas no coinciden");
+    } else {
+      users.push(user);
+      localStorage.setItem("users", JSON.stringify(users));
+      swal("Registro exitoso!", {
+        icon: "success",
+      }).then(
+        (value) => {
+          window.location.href = "./index.html";
+        },
+        (dismiss) => {
+          window.location.href = "./index.html";
+        }
+      );
     }
-    users.push(user);
-    localStorage.setItem("users", JSON.stringify(users));
-    swal("Registro exitoso!", "Bienvenido a la tienda", "success").then(
-      (value) => {
-        window.location.href = "./login.html";
-      }
-    );
   });
 }
 
