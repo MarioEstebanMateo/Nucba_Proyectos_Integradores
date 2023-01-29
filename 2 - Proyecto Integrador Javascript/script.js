@@ -337,14 +337,9 @@ if (registerForm) {
       localStorage.setItem("users", JSON.stringify(users));
       swal("Registro exitoso!", {
         icon: "success",
-      }).then(
-        (value) => {
-          window.location.href = "./index.html";
-        },
-        (dismiss) => {
-          window.location.href = "./index.html";
-        }
-      );
+      }).then((value) => {
+        window.location.href = "./login.html";
+      });
     }
   });
 }
