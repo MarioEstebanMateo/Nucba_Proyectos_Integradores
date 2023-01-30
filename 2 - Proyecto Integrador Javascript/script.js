@@ -338,7 +338,7 @@ if (registerForm) {
       swal("Registro exitoso!", {
         icon: "success",
       }).then((value) => {
-        window.location.href = "./index.html";
+        window.location.href = "./login.html";
       });
     }
   });
