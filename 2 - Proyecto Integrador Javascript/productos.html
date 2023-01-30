@@ -50,34 +50,20 @@
         <div class="collapse navbar-collapse p-2" id="navbarSupportedContent">
           <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="index.html">Home</a>
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="productos.html"
+                >Productos</a
+              >
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="cart.html"
+              <a class="nav-link" href="cart.html"
                 ><i class="fa-solid fa-cart-shopping"></i
               ></a>
             </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Usuarios
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="login.html">Login</a></li>
-                <li>
-                  <a class="dropdown-item" href="registrarse.html"
-                    >Registrarse</a
-                  >
-                </li>
-              </ul>
-            </li>
             <li>
-              <div>
+              <div class="ms-3">
                 <button id="logoutButton" class="btn btn-danger">
                   <i class="fa-solid fa-sign-out"></i>
                   Cerrar Sesion
@@ -108,71 +94,32 @@
       </div>
     </nav>
 
-    <main>
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6 mx-auto">
-            <div class="myform form">
-              <div class="logo mb-3">
-                <div class="col-md-12 text-center mt-3">
-                  <h1>Registrarse</h1>
-                </div>
-              </div>
-              <form action="" method="" name="registrarse" id="registerForm">
-                <div class="form-group">
-                  <label for="emailRegister">Email</label>
-                  <input
-                    type="email"
-                    name="emailRegister"
-                    class="form-control"
-                    id="emailRegister"
-                    aria-describedby="emailHelp"
-                    placeholder="Ingrese su correo"
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="passwordRegister">Contraseña</label>
-                  <input
-                    type="password"
-                    name="passwordRegister"
-                    id="passwordRegister"
-                    class="form-control"
-                    aria-describedby="emailHelp"
-                    placeholder="Ingrese su contraseña"
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="passwordRegister2">Repetir Contraseña</label>
-                  <input
-                    type="password"
-                    name="passwordRegister2"
-                    id="passwordRegister2"
-                    class="form-control"
-                    aria-describedby="emailHelp"
-                    placeholder="Repita su contraseña"
-                  />
-                </div>
-                <div class="col-md-12 text-center pt-3 pb-3">
-                  <button
-                    class="btn btn-block mybtn btn-primary tx-tfm"
-                    id="registerButton"
-                    onclick="register()"
-                  >
-                    Registrarse
-                  </button>
-                </div>
-                <div>
-                  <p class="text-center">
-                    Ya tienes una cuenta?
-                    <a href="login.html" id="login">Inicia Sesion</a>
-                  </p>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
+    <section id="products">
+      <div class="main-image">
+        <img
+          src="img/mainImage3.jpg"
+          class="img-fluid"
+          alt="imagen de computadora y carrito de compras"
+        />
       </div>
-    </main>
+      <div class="title-products text-center m-4">
+        <h2>Nuestros Productos</h2>
+      </div>
+      <div
+        class="d-flex align-items-center justify-content-center flex-column gap-4"
+      >
+        <form class="d-flex mb-4">
+          <input
+            id="searchInput"
+            class="form-control me-1"
+            type="search"
+            placeholder="Busca tu producto"
+            aria-label="Search"
+          />
+        </form>
+      </div>
+      <div class="products-container"></div>
+    </section>
 
     <div id="footer" class="bg-dark text-center p-3 text-white">
       <p class="small">

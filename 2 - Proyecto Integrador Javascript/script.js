@@ -276,7 +276,7 @@ if (clearCart) {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        localStorage.clear();
+        localStorage.removeItem("cart");
         swal("Tu carrito ha sido borrado!", {
           icon: "success",
         }).then((willDelete) => {
@@ -301,7 +301,7 @@ function deleteItem(index) {
 const seguirComprando = document.getElementById("seguirComprando");
 if (seguirComprando) {
   seguirComprando.addEventListener("click", function () {
-    window.location.href = "./index.html";
+    window.location.href = "./productos.html";
   });
 }
 
@@ -338,7 +338,7 @@ if (registerForm) {
       swal("Registro exitoso!", {
         icon: "success",
       }).then((value) => {
-        window.location.href = "./login.html";
+        window.location.href = "./index.html";
       });
     }
   });
@@ -367,7 +367,7 @@ if (loginForm) {
           userFound = true;
           swal("Bienvenido!", "Has iniciado sesión", "success").then(
             (value) => {
-              window.location.href = "./index.html";
+              window.location.href = "./productos.html";
             }
           );
         }
@@ -394,7 +394,7 @@ if (logoutButton) {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        localStorage.clear();
+        localStorage.removeItem("cart");
         swal("Sesión cerrada!", {
           icon: "success",
         }).then((willDelete) => {
