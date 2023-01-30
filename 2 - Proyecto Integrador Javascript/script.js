@@ -378,3 +378,31 @@ if (loginForm) {
     }
   });
 }
+
+// ---------------------- Cerrar Sesión ----------------------
+
+// when click on logout dropdown menu swal validation, clear cart from local storage and redirect to index.html
+
+const logoutButton = document.getElementById("logoutButton");
+if (logoutButton) {
+  logoutButton.addEventListener("click", function () {
+    swal({
+      title: "¿Estás seguro?",
+      text: "Una vez cerrada la sesión, no podrás recuperar tu carrito!",
+      icon: "warning",
+      buttons: ["Cancelar", "Cerrar sesión"],
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        localStorage.clear();
+        swal("Sesión cerrada!", {
+          icon: "success",
+        }).then((willDelete) => {
+          if (willDelete) {
+            window.location.href = "./index.html";
+          }
+        });
+      }
+    });
+  });
+}
