@@ -53,13 +53,13 @@
               <a class="nav-link" aria-current="page" href="index.html">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="cart.html"
+              <a class="nav-link active" href="cart.html"
                 ><i class="fa-solid fa-cart-shopping"></i
               ></a>
             </li>
             <li class="nav-item dropdown">
               <a
-                class="nav-link dropdown-toggle active"
+                class="nav-link dropdown-toggle"
                 href="#"
                 role="button"
                 data-bs-toggle="dropdown"
@@ -68,20 +68,21 @@
                 Usuarios
               </a>
               <ul class="dropdown-menu">
-                <li>
-                  <a class="dropdown-item active" href="login.html">Login</a>
-                </li>
+                <li><a class="dropdown-item" href="login.html">Login</a></li>
                 <li>
                   <a class="dropdown-item" href="registrarse.html"
                     >Registrarse</a
                   >
                 </li>
-                <li>
-                  <a id="logoutButton" class="dropdown-item" href="index.html"
-                    ><i class="fa-solid fa-sign-out"></i> Cerrar Sesión</a
-                  >
-                </li>
               </ul>
+            </li>
+            <li>
+              <div>
+                <button id="logoutButton" class="btn btn-danger">
+                  <i class="fa-solid fa-sign-out"></i>
+                  Cerrar Sesion
+                </button>
+              </div>
             </li>
           </ul>
           <div class="social-buttons">
