@@ -399,7 +399,7 @@ if (logoutButton) {
           icon: "success",
         }).then((willDelete) => {
           if (willDelete) {
-            window.location.href = "./index.html";
+            window.location.href = "./login.html";
           }
         });
       }
