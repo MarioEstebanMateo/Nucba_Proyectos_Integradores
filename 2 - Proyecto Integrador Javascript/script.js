@@ -219,6 +219,26 @@ if (cart == null) {
       tableDataPrice.innerHTML = cart[i].price;
       tableRow.appendChild(tableDataPrice);
 
+      let tableDataQuantity = document.createElement("td");
+      tableRow.appendChild(tableDataQuantity);
+
+      let quantity = document.createElement("input");
+      quantity.type = "number";
+      quantity.value = 1;
+      quantity.min = 1;
+      quantity.classList.add("form-control");
+      quantity.style.width = "75px";
+      tableDataQuantity.appendChild(quantity);
+
+      let tableDataTotal = document.createElement("td");
+      tableDataTotal.innerHTML = cart[i].price;
+      tableRow.appendChild(tableDataTotal);
+
+      quantity.addEventListener("change", function () {
+        tableDataTotal.innerHTML = cart[i].price * quantity.value;
+        updateCartTotal();
+      });
+
       let tableDataDelete = document.createElement("td");
       tableRow.appendChild(tableDataDelete);
 
@@ -255,13 +275,16 @@ if (cart == null) {
 
 // calculate total price
 
-let totalPrice = 0;
-for (let i = 0; i < cart.length; i++) {
-  totalPrice += cart[i].price;
-}
-if (document.getElementById("totalPrice")) {
-  document.getElementById("totalPrice").innerHTML = totalPrice;
-}
+const updateCartTotal = () => {
+  let cartTotal = 0;
+  let tableDataTotal = document.getElementsByClassName("tableDataTotal");
+  for (let i = 0; i < tableDataTotal.length; i++) {
+    cartTotal += parseFloat(tableDataTotal[i].innerHTML);
+  }
+  document.getElementById("totalPrice").innerHTML = cartTotal;
+};
+
+updateCartTotal();
 
 // clear cart with sweetalert2 validation
 
@@ -403,6 +426,24 @@ if (logoutButton) {
           }
         });
       }
+    });
+  });
+}
+
+// ---------------------- Finalizar Compra ----------------------
+
+// when click on finalizar compra show swal validation and redirect to productos.html
+
+const finalizarCompra = document.getElementById("finalizarCompra");
+if (finalizarCompra) {
+  finalizarCompra.addEventListener("click", function () {
+    swal({
+      title: "Gracias por tu compra!",
+      text: "Tu pedido será enviado a la brevedad",
+      icon: "success",
+      button: "Seguir comprando",
+    }).then((value) => {
+      window.location.href = "./productos.html";
     });
   });
 }

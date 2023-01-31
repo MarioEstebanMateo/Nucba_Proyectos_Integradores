@@ -90,6 +90,7 @@ body {
 
 .card-text {
   font-size: 12px;
+  min-height: 100px;
   margin-bottom: 10px;
   white-space: normal;
   text-overflow: ellipsis;
