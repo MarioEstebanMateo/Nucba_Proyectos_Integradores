@@ -273,18 +273,25 @@ if (cart == null) {
   }
 }
 
-// calculate total price
+// update cart total
+
+let totalPrice = 0;
+for (let i = 0; i < cart.length; i++) {
+  totalPrice += cart[i].price;
+}
+if (document.getElementById("totalPrice")) {
+  document.getElementById("totalPrice").innerHTML = totalPrice;
+}
 
 const updateCartTotal = () => {
-  let cartTotal = 0;
-  let tableDataTotal = document.getElementsByClassName("tableDataTotal");
-  for (let i = 0; i < tableDataTotal.length; i++) {
-    cartTotal += parseFloat(tableDataTotal[i].innerHTML);
+  const totalPrice = document.getElementById("totalPrice");
+  let cart = JSON.parse(localStorage.getItem("cart"));
+  let total = 0;
+  for (let i = 0; i < cart.length; i++) {
+    total += cart[i].price * document.querySelectorAll("input")[i].value;
   }
-  document.getElementById("totalPrice").innerHTML = cartTotal;
+  totalPrice.innerHTML = total;
 };
-
-updateCartTotal();
 
 // clear cart with sweetalert2 validation
 
@@ -437,9 +444,13 @@ if (logoutButton) {
 const finalizarCompra = document.getElementById("finalizarCompra");
 if (finalizarCompra) {
   finalizarCompra.addEventListener("click", function () {
+    const total = document.getElementById("totalPrice").innerHTML;
     swal({
       title: "Gracias por tu compra!",
-      text: "Tu pedido será enviado a la brevedad",
+      text:
+        "Tu pedido será enviado a la brevedad. El total de tu compra es de $" +
+        total +
+        ". Gracias por elegirnos!",
       icon: "success",
       button: "Seguir comprando",
     }).then((value) => {
