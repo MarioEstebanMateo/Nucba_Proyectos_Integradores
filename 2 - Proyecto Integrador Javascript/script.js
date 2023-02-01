@@ -524,6 +524,7 @@ if (finalizarCompra) {
       icon: "success",
       button: "Seguir comprando",
     }).then((value) => {
+      localStorage.removeItem("cart");
       window.location.href = "./productos.html";
     });
   });
