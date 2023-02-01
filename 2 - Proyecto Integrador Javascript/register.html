@@ -85,44 +85,56 @@
             <div class="myform form">
               <div class="logo mb-3">
                 <div class="col-md-12 text-center mt-3">
-                  <h1>Login</h1>
+                  <h1>Registrarse</h1>
                 </div>
               </div>
-              <form action="" method="" name="login" id="loginForm">
+              <form action="" method="" name="registrarse" id="registerForm">
                 <div class="form-group">
-                  <label for="emailLogin">Email</label>
+                  <label for="emailRegister">Email</label>
                   <input
                     type="email"
-                    name="emailLogin"
+                    name="emailRegister"
                     class="form-control"
-                    id="emailLogin"
+                    id="emailRegister"
                     aria-describedby="emailHelp"
                     placeholder="Ingrese su correo"
                   />
                 </div>
                 <div class="form-group">
-                  <label for="passwordLogin">Password</label>
+                  <label for="passwordRegister">Contraseña</label>
                   <input
                     type="password"
-                    name="passwordLogin"
-                    id="passwordLogin"
+                    name="passwordRegister"
+                    id="passwordRegister"
                     class="form-control"
                     aria-describedby="emailHelp"
                     placeholder="Ingrese su contraseña"
                   />
                 </div>
+                <div class="form-group">
+                  <label for="passwordRegister2">Repetir Contraseña</label>
+                  <input
+                    type="password"
+                    name="passwordRegister2"
+                    id="passwordRegister2"
+                    class="form-control"
+                    aria-describedby="emailHelp"
+                    placeholder="Repita su contraseña"
+                  />
+                </div>
                 <div class="col-md-12 text-center pt-3 pb-3">
                   <button
-                    class="btn btn-block mybtn btn-primary tx-tfm"
-                    id="loginButton"
+                    class="btn btn-block mybtn btn-success tx-tfm"
+                    id="registerButton"
+                    onclick="register()"
                   >
-                    Ingresar
+                    Registrarse
                   </button>
                 </div>
                 <div>
                   <p class="text-center">
-                    No tienes una cuenta?
-                    <a href="register.html">Registrate</a>
+                    Ya tienes una cuenta?
+                    <a href="login.html" id="login">Inicia Sesion</a>
                   </p>
                 </div>
               </form>

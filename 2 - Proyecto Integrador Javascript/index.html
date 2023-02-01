@@ -36,19 +36,19 @@
         <div>
           <img src="/img/logo.jpg" alt="" class="nav-icon ms-2" />
         </div>
-        <button
-          class="navbar-toggler me-2"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse p-2" id="navbarSupportedContent">
-          <div class="social-buttons ms-auto">
+          <div class="text-center">
+            <h3>Bienvenidos a Tienda El Socorro</h3>
+            <button
+              id="ingresarButton"
+              class="btn btn-outline-success"
+              type="button"
+              data-bs-toggle="modal"
+              data-bs-target="#loginModal"
+            >
+              Ingresar para comprar
+            </button>
+          </div>
+          <div class="social-buttons">
             <div class="button1">
               <a href="https://www.facebook.com/tiendaelsocorro" target="_blank"
                 ><i class="fa-brands fa-facebook text-white"></i
@@ -71,71 +71,43 @@
       </div>
     </nav>
 
-    <main>
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6 mx-auto">
-            <div class="myform form">
-              <div class="logo mb-3">
-                <div class="col-md-12 text-center mt-3">
-                  <h1>Registrarse</h1>
-                </div>
-              </div>
-              <form action="" method="" name="registrarse" id="registerForm">
-                <div class="form-group">
-                  <label for="emailRegister">Email</label>
-                  <input
-                    type="email"
-                    name="emailRegister"
-                    class="form-control"
-                    id="emailRegister"
-                    aria-describedby="emailHelp"
-                    placeholder="Ingrese su correo"
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="passwordRegister">Contraseña</label>
-                  <input
-                    type="password"
-                    name="passwordRegister"
-                    id="passwordRegister"
-                    class="form-control"
-                    aria-describedby="emailHelp"
-                    placeholder="Ingrese su contraseña"
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="passwordRegister2">Repetir Contraseña</label>
-                  <input
-                    type="password"
-                    name="passwordRegister2"
-                    id="passwordRegister2"
-                    class="form-control"
-                    aria-describedby="emailHelp"
-                    placeholder="Repita su contraseña"
-                  />
-                </div>
-                <div class="col-md-12 text-center pt-3 pb-3">
-                  <button
-                    class="btn btn-block mybtn btn-success tx-tfm"
-                    id="registerButton"
-                    onclick="register()"
-                  >
-                    Registrarse
-                  </button>
-                </div>
-                <div>
-                  <p class="text-center">
-                    Ya tienes una cuenta?
-                    <a href="login.html" id="login">Inicia Sesion</a>
-                  </p>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
+    <section id="products">
+      <div class="main-image">
+        <img
+          src="img/mainImage3.jpg"
+          class="img-fluid"
+          alt="imagen de computadora y carrito de compras"
+        />
       </div>
-    </main>
+      <div class="title-products text-center m-4">
+        <h2>Algunos de Nuestros Productos</h2>
+      </div>
+      <div
+        class="d-flex align-items-center justify-content-center flex-column gap-4"
+      >
+        <form class="d-flex mb-4">
+          <input
+            id="searchInput"
+            class="form-control me-1"
+            type="search"
+            placeholder="Busca tu producto"
+            aria-label="Search"
+          />
+        </form>
+      </div>
+      <div class="products-container"></div>
+      <div class="text-center mb-3">
+        <button
+          id="ingresarButton2"
+          class="btn btn-success"
+          type="button"
+          data-bs-toggle="modal"
+          data-bs-target="#loginModal"
+        >
+          Ingresar para comprar
+        </button>
+      </div>
+    </section>
 
     <div id="footer" class="bg-dark text-center p-3 text-white">
       <p class="small">

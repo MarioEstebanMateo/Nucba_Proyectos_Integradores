@@ -84,6 +84,60 @@ const showAllProducts = () => {
     });
 };
 
+const showAllProductsLanding = () => {
+  const url = "./productos.json";
+
+  fetch(url)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+
+      const productsContainer =
+        document.getElementsByClassName("products-container")[0];
+
+      for (let i = 0; i < data.length; i++) {
+        const product = data[i];
+
+        const productDiv = document.createElement("div");
+        productDiv.classList.add("card");
+        productDiv.style.width = "18rem";
+
+        const productImage = document.createElement("img");
+        productImage.classList.add("card-img-top");
+        productImage.src = product.image;
+        productImage.alt = product.title;
+
+        const productBody = document.createElement("div");
+        productBody.classList.add("card-body");
+
+        const productName = document.createElement("h5");
+        productName.classList.add("card-title");
+        productName.innerHTML = product.title;
+
+        const productDescription = document.createElement("p");
+        productDescription.classList.add("card-text");
+        productDescription.innerHTML = product.description;
+
+        const productPrice = document.createElement("p");
+        productPrice.classList.add("card-price");
+        productPrice.innerHTML = "Precio: AR$ " + data[i].price;
+
+        productBody.appendChild(productName);
+        productBody.appendChild(productDescription);
+        productBody.appendChild(productPrice);
+
+        productDiv.appendChild(productImage);
+        productDiv.appendChild(productBody);
+
+        if (productsContainer) {
+          productsContainer.appendChild(productDiv);
+        }
+      }
+    });
+};
+
 const searchProduct = () => {
   const url = "./productos.json";
 
@@ -171,7 +225,24 @@ const searchProduct = () => {
     });
 };
 
-showAllProducts();
+//when index.html loads allProductsLanding() is called else showAllProducts() is called
+
+if (window.location.href.includes("index.html")) {
+  showAllProductsLanding();
+} else {
+  showAllProducts();
+}
+
+const ingresarButton = document.getElementById("ingresarButton");
+const ingresarButton2 = document.getElementById("ingresarButton2");
+if (ingresarButton && ingresarButton2) {
+  ingresarButton.addEventListener("click", function () {
+    window.location.href = "./register.html";
+  });
+  ingresarButton2.addEventListener("click", function () {
+    window.location.href = "./register.html";
+  });
+}
 
 // ---------------- Search ----------------
 
@@ -429,7 +500,7 @@ if (logoutButton) {
           icon: "success",
         }).then((willDelete) => {
           if (willDelete) {
-            window.location.href = "./login.html";
+            window.location.href = "./index.html";
           }
         });
       }
