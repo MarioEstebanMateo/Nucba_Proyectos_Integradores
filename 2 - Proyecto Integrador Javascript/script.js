@@ -305,6 +305,16 @@ if (cart == null) {
       tableRow.appendChild(tableDataTotal);
 
       quantity.addEventListener("change", function () {
+        //quantity can not be less than 1
+        if (quantity.value < 1) {
+          swal({
+            title: "Cantidad no válida",
+            text: "La cantidad no puede ser menor a 1",
+            icon: "warning",
+            button: "Aceptar",
+          });
+          quantity.value = 1;
+        }
         tableDataTotal.innerHTML = cart[i].price * quantity.value;
         updateCartTotal();
       });
