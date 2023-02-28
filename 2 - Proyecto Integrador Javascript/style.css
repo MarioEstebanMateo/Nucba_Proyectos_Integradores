@@ -41,6 +41,14 @@ body {
   margin-right: 20px;
 }
 
+.title-products {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  margin: 20px;
+}
+
 .title-products h2 {
   text-align: center;
   margin: 20px;

@@ -539,3 +539,14 @@ if (finalizarCompra) {
     });
   });
 }
+
+// -------------- boton imprimir --------------
+
+// when click on imprimir button print the page on a pdf file
+
+const imprimir = document.getElementById("imprimir");
+if (imprimir) {
+  imprimir.addEventListener("click", function () {
+    window.print();
+  });
+}
