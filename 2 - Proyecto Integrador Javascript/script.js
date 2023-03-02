@@ -40,24 +40,46 @@ const showAllProducts = () => {
 
         const productButton = document.createElement("button");
         productButton.classList.add("btn");
-        productButton.classList.add("btn-primary");
+        productButton.classList.add("btn-outline-primary");
         productButton.innerHTML = "Agregar al carrito";
         productButton.style.marginLeft = "30%";
         productButton.style.marginRight = "30%";
         productButton.style.marginTop = "10px";
 
         productButton.addEventListener("click", function () {
-          addToCart(product);
-          swal({
-            title: "Producto agregado al carrito",
-            text: "¿Desea ir al carrito?",
-            icon: "success",
-            buttons: ["Seguir comprando", "Ir al carrito"],
-          }).then((willDelete) => {
-            if (willDelete) {
-              window.location.href = "./cart.html";
+          if (!localStorage.getItem("cart")) {
+            localStorage.setItem("cart", "[]");
+          } else {
+            const cart = JSON.parse(localStorage.getItem("cart"));
+            const productInCart = cart.find(
+              (item) => item.title === product.title
+            );
+            if (productInCart) {
+              swal({
+                title:
+                  "Producto ya agregado al carrito, puede modificar la cantidad en el carrito",
+                text: "¿Desea ir al carrito?",
+                icon: "error",
+                buttons: ["Seguir comprando", "Ir al carrito"],
+              }).then((willDelete) => {
+                if (willDelete) {
+                  window.location.href = "./cart.html";
+                }
+              });
+            } else {
+              addToCart(product);
+              swal({
+                title: "Producto agregado al carrito",
+                text: "¿Desea ir al carrito?",
+                icon: "success",
+                buttons: ["Seguir comprando", "Ir al carrito"],
+              }).then((willDelete) => {
+                if (willDelete) {
+                  window.location.href = "./cart.html";
+                }
+              });
             }
-          });
+          }
         });
 
         const addToCart = (product) => {
@@ -129,24 +151,46 @@ const searchProduct = () => {
 
           const productButton = document.createElement("button");
           productButton.classList.add("btn");
-          productButton.classList.add("btn-primary");
+          productButton.classList.add("btn-outline-primary");
           productButton.innerHTML = "Agregar al carrito";
           productButton.style.marginLeft = "30%";
           productButton.style.marginRight = "30%";
           productButton.style.marginTop = "10px";
 
           productButton.addEventListener("click", function () {
-            addToCart(product);
-            swal({
-              title: "Producto agregado al carrito",
-              text: "¿Desea ir al carrito?",
-              icon: "success",
-              buttons: ["Seguir comprando", "Ir al carrito"],
-            }).then((willDelete) => {
-              if (willDelete) {
-                window.location.href = "./cart.html";
+            if (!localStorage.getItem("cart")) {
+              localStorage.setItem("cart", "[]");
+            } else {
+              const cart = JSON.parse(localStorage.getItem("cart"));
+              const productInCart = cart.find(
+                (item) => item.title === product.title
+              );
+              if (productInCart) {
+                swal({
+                  title:
+                    "Producto ya agregado al carrito, puede modificar la cantidad en el carrito",
+                  text: "¿Desea ir al carrito?",
+                  icon: "error",
+                  buttons: ["Seguir comprando", "Ir al carrito"],
+                }).then((willDelete) => {
+                  if (willDelete) {
+                    window.location.href = "./cart.html";
+                  }
+                });
+              } else {
+                addToCart(product);
+                swal({
+                  title: "Producto agregado al carrito",
+                  text: "¿Desea ir al carrito?",
+                  icon: "success",
+                  buttons: ["Seguir comprando", "Ir al carrito"],
+                }).then((willDelete) => {
+                  if (willDelete) {
+                    window.location.href = "./cart.html";
+                  }
+                });
               }
-            });
+            }
           });
 
           const addToCart = (product) => {
@@ -387,6 +431,8 @@ if (clearCart) {
     }).then((willDelete) => {
       if (willDelete) {
         localStorage.removeItem("cart");
+        cart = [];
+        localStorage.setItem("cart", JSON.stringify(cart));
         swal("Tu carrito ha sido borrado!", {
           icon: "success",
         }).then((willDelete) => {
@@ -477,6 +523,8 @@ if (loginForm) {
           userFound = true;
           swal("Bienvenido!", "Has iniciado sesión", "success").then(
             (value) => {
+              cart = [];
+              localStorage.setItem("cart", JSON.stringify(cart));
               window.location.href = "./productos.html";
             }
           );
@@ -535,6 +583,8 @@ if (finalizarCompra) {
       button: "Seguir comprando",
     }).then((value) => {
       localStorage.removeItem("cart");
+      cart = [];
+      localStorage.setItem("cart", JSON.stringify(cart));
       window.location.href = "./productos.html";
     });
   });
