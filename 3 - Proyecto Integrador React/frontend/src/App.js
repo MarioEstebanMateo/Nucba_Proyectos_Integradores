@@ -1,9 +1,26 @@
 import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+import Home from "./components/Home";
+import ProductPage from "./components/ProductPage";
+import Navbar from "./components/Navbar";
+import CartPage from "./components/CartPage";
+import Login from "./components/Login";
+import Footer from "./components/Footer";
 
 function App() {
   return (
     <div className="App">
-      <h1>Hello World!</h1>
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/product/:id" element={<ProductPage />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+        <Footer />
+      </Router>
     </div>
   );
 }
