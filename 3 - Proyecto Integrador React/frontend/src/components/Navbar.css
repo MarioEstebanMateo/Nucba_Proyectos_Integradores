@@ -19,6 +19,7 @@
 .navbar-brand img {
     height: 100px;
     width: 100px;
+    border-radius: 10px;
 }
 
 .navbar {
