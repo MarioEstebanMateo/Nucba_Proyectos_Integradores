@@ -6,6 +6,7 @@ import ProductPage from "./components/ProductPage";
 import Navbar from "./components/Navbar";
 import CartPage from "./components/CartPage";
 import Login from "./components/Login";
+import Register from "./components/Register";
 import Footer from "./components/Footer";
 
 function App() {

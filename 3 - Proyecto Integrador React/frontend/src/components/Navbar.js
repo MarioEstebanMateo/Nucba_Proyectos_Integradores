@@ -6,13 +6,19 @@ import "./Navbar.css";
 
 const Navbar = () => {
   return (
-    <nav className="navbar">
-      <div className="container-fluid">
+    <div className="container-fluid">
+      <header className="headerContainer">
         <div className="navbar-logo">
           <NavLink exact to="/" className="navbar-brand">
             <img src={logo} alt="logo" />
           </NavLink>
         </div>
+        <div className="pageTitle">
+          <h2>¡Bienvenidos a Tienda El Socorro!</h2>
+        </div>
+      </header>
+
+      <nav className="navbar">
         <ul className="navbar-links mx-auto">
           <li>
             <NavLink exact to="/" activeClassName="active">
@@ -30,8 +36,8 @@ const Navbar = () => {
             </NavLink>
           </li>
         </ul>
-      </div>
-    </nav>
+      </nav>
+    </div>
   );
 };
 
