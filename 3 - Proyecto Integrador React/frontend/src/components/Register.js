@@ -79,36 +79,42 @@ const Register = () => {
             </div>
             <form action="" method="post" name="login">
               <div className="form-group">
+                <label htmlFor="email">Email</label>
                 <input
                   type="email"
                   name="email"
-                  className="form-control my-input"
-                  id="emailRegister"
-                  placeholder="Email"
+                  className="form-control"
+                  id="emailLogin"
+                  aria-describedby="emailHelp"
+                  placeholder="Enter email"
                 />
               </div>
               <div className="form-group">
+                <label htmlFor="password">Password</label>
                 <input
                   type="password"
                   name="password"
-                  id="passwordRegister"
-                  className="form-control my-input"
-                  placeholder="Password"
+                  id="passwordLogin"
+                  className="form-control"
+                  aria-describedby="emailHelp"
+                  placeholder="Enter Password"
                 />
               </div>
               <div className="form-group">
+                <label htmlFor="confirmPassword">Confirm Password</label>
                 <input
                   type="password"
-                  name="password"
-                  id="confirmPasswordRegister"
-                  className="form-control my-input"
+                  name="confirmPassword"
+                  id="confirmPassword"
+                  className="form-control"
+                  aria-describedby="emailHelp"
                   placeholder="Confirm Password"
                 />
               </div>
               <div className="col-md-12 text-center ">
                 <button
                   type="submit"
-                  className=" btn btn-block send-button tx-tfm"
+                  className=" btn btn-block mybtn btn-primary tx-tfm"
                   onClick={register}
                 >
                   Register
@@ -122,10 +128,7 @@ const Register = () => {
               </div>
               <div className="form-group">
                 <p className="text-center">
-                  Already have account?{" "}
-                  <Link to="/login" id="signup">
-                    Login here
-                  </Link>
+                  Have an account? <Link to="/login">Login here</Link>
                 </p>
               </div>
             </form>

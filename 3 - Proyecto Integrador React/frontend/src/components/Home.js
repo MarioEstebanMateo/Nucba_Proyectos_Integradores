@@ -1,22 +1,44 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import swal2 from "sweetalert2";
 import axios from "axios";
 
 import "./Home.css";
 import mainImage from "../img/mainImage3.jpg";
 
 const Home = () => {
-  //axios para traer los productos from api
-
   const [products, setProducts] = React.useState([]);
+  const [search, setSearch] = React.useState("");
 
-  React.useEffect(() => {
-    const getProducts = async () => {
-      const url = "https://643a093390cd4ba563f1ef3d.mockapi.io/products";
-      const response = await axios.get(url);
-      setProducts(response.data);
-    };
+  const getProducts = async () => {
+    await axios
+      .get("https://643a093390cd4ba563f1ef3d.mockapi.io/products")
+      .then((response) => {
+        setProducts(response.data);
+        console.log(response.data);
+      });
+  };
+
+  const handleChange = (e) => {
+    setSearch(e.target.value);
+  };
+
+  const filteredProducts = async () => {
+    await axios
+      .get(
+        `https://643a093390cd4ba563f1ef3d.mockapi.io/products?search=${search}`
+      )
+      .then((response) => {
+        setProducts(response.data);
+        console.log(response.data);
+      });
+  };
+
+  const searchButton = (e) => {
+    e.preventDefault();
+    filteredProducts();
+  };
+
+  useEffect(() => {
     getProducts();
   }, []);
 
@@ -31,10 +53,16 @@ const Home = () => {
             id="searchInput"
             class="form-control me-1"
             type="search"
+            value={search}
             placeholder="Busca tu producto"
             aria-label="Search"
+            onChange={handleChange}
           />
-          <button className="btn btn-outline-primary" type="submit">
+          <button
+            className="btn btn-outline-primary"
+            type="submit"
+            onClick={searchButton}
+          >
             Buscar
           </button>
         </form>
