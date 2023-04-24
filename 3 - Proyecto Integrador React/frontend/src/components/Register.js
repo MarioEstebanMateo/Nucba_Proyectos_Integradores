@@ -79,34 +79,40 @@ const Register = () => {
             </div>
             <form action="" method="post" name="login">
               <div className="form-group">
-                <label htmlFor="email">Email</label>
+                <label className="mt-3" htmlFor="email">
+                  Email
+                </label>
                 <input
                   type="email"
                   name="email"
-                  className="form-control"
+                  className="form-control mt-2"
                   id="emailLogin"
                   aria-describedby="emailHelp"
                   placeholder="Enter email"
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="password">Password</label>
+                <label className="mt-3" htmlFor="password">
+                  Password
+                </label>
                 <input
                   type="password"
                   name="password"
                   id="passwordLogin"
-                  className="form-control"
+                  className="form-control mt-2"
                   aria-describedby="emailHelp"
                   placeholder="Enter Password"
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="confirmPassword">Confirm Password</label>
+                <label className="mt-3" htmlFor="confirmPassword">
+                  Confirm Password
+                </label>
                 <input
                   type="password"
                   name="confirmPassword"
                   id="confirmPassword"
-                  className="form-control"
+                  className="form-control mt-2"
                   aria-describedby="emailHelp"
                   placeholder="Confirm Password"
                 />
@@ -114,7 +120,7 @@ const Register = () => {
               <div className="col-md-12 text-center ">
                 <button
                   type="submit"
-                  className=" btn btn-block mybtn btn-primary tx-tfm"
+                  className=" btn btn-block mybtn btn-primary tx-tfm mt-3"
                   onClick={register}
                 >
                   Register
