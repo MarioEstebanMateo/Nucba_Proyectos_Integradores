@@ -11,3 +11,13 @@
   margin-top: 30px;
   gap: 20px;
 }
+
+.tableHead {
+  background-color: black;
+  color: white;
+}
+
+td input {
+  width: 50px;
+  text-align: center;
+}
