@@ -1,48 +1,85 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import swal2 from "sweetalert2";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 import "./Login.css";
 
 const Login = () => {
-  const login = (e) => {
+  const navigate = useNavigate();
+
+  const getUsers = async () => {
+    await axios
+      .get("https://643a093390cd4ba563f1ef3d.mockapi.io/users")
+      .then((response) => {
+        console.log(response.data);
+      });
+  };
+
+  const login = async (e) => {
     e.preventDefault();
     const email = document.getElementById("emailLogin").value;
     const password = document.getElementById("passwordLogin").value;
 
-    if (!email || !password) {
+    //todos los campos son obligatorios
+
+    if (email === "" || password === "") {
       swal2.fire({
-        icon: "error",
-        title: "Oops...",
+        title: "Error",
         text: "Todos los campos son obligatorios",
-      });
-      return;
-    }
-
-    if (!/\S+@\S+\.\S+/.test(email)) {
-      swal2.fire({
         icon: "error",
-        title: "Oops...",
+        confirmButtonText: "Aceptar",
+      });
+    }
+    //validar que el email sea un email valido
+    else if (!/\S+@\S+\.\S+/.test(email)) {
+      swal2.fire({
+        title: "Error",
         text: "El email no es valido",
-      });
-      return;
-    }
-
-    const users = JSON.parse(localStorage.getItem("users"));
-    const user = users.find((user) => user.email === email);
-    if (user && user.password === password) {
-      swal2.fire({
-        icon: "success",
-        title: "Bienvenido",
-        text: "Te has logueado correctamente",
-      });
-      window.location.href = "/";
-    } else {
-      swal2.fire({
         icon: "error",
-        title: "Oops...",
-        text: "El usuario no existe",
+        confirmButtonText: "Aceptar",
       });
+    } else {
+      await axios
+        .get("https://643a093390cd4ba563f1ef3d.mockapi.io/users")
+        .then((response) => {
+          console.log(response.data);
+          const users = response.data;
+          const user = users.filter((user) => user.email === email);
+
+          if (user.length > 0) {
+            if (user[0].password === password) {
+              swal2
+                .fire({
+                  title: "Bienvenido",
+                  text: "Usuario logueado correctamente",
+                  icon: "success",
+                  confirmButtonText: "Aceptar",
+                })
+                .then(() => {
+                  navigate("/");
+                });
+              //limpiar el formulario
+              document.getElementById("emailLogin").value = "";
+              document.getElementById("passwordLogin").value = "";
+            } else {
+              swal2.fire({
+                title: "Error",
+                text: "Contraseña incorrecta",
+                icon: "error",
+                confirmButtonText: "Aceptar",
+              });
+            }
+          } else {
+            swal2.fire({
+              title: "Error",
+              text: "El usuario no existe",
+              icon: "error",
+              confirmButtonText: "Aceptar",
+            });
+          }
+        });
     }
   };
 

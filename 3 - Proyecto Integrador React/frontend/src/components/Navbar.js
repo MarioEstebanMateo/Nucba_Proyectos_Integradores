@@ -30,11 +30,11 @@ const Navbar = () => {
               Cart <i class="fa-solid fa-cart-shopping"></i>
             </NavLink>
           </li>
-          <li>
+          {/* <li>
             <NavLink exact to="/login" activeClassName="active">
               Login
             </NavLink>
-          </li>
+          </li> */}
         </ul>
       </nav>
     </div>

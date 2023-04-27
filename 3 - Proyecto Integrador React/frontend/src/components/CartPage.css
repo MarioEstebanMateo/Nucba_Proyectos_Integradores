@@ -1,0 +1,13 @@
+.imgTable {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.totalButtons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  gap: 20px;
+}

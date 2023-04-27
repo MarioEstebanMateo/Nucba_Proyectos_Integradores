@@ -1,70 +1,62 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import swal2 from "sweetalert2";
+import axios from "axios";
 
 import "./Register.css";
 
 const Register = () => {
-  const register = (e) => {
+  const register = async (e) => {
     e.preventDefault();
-    const email = document.getElementById("emailRegister").value;
-    const password = document.getElementById("passwordRegister").value;
+    const email = document.getElementById("emailLogin").value;
+    const password = document.getElementById("passwordLogin").value;
     const confirmPassword = document.getElementById(
-      "confirmPasswordRegister"
+      "confirmPasswordLogin"
     ).value;
 
-    if (!email || !password || !confirmPassword) {
+    //todos los campos son obligatorios
+
+    if (email === "" || password === "" || confirmPassword === "") {
       swal2.fire({
-        icon: "error",
-        title: "Oops...",
+        title: "Error",
         text: "Todos los campos son obligatorios",
-      });
-      return;
-    }
-
-    if (!/\S+@\S+\.\S+/.test(email)) {
-      swal2.fire({
         icon: "error",
-        title: "Oops...",
+        confirmButtonText: "Aceptar",
+      });
+    }
+    //validar que el email sea un email valido
+    else if (!/\S+@\S+\.\S+/.test(email)) {
+      swal2.fire({
+        title: "Error",
         text: "El email no es valido",
-      });
-      return;
-    }
-
-    if (password !== confirmPassword) {
-      swal2.fire({
         icon: "error",
-        title: "Oops...",
+        confirmButtonText: "Aceptar",
+      });
+    }
+    //validar que las contraseñas sean iguales
+    else if (password === confirmPassword) {
+      await axios
+        .post("https://643a093390cd4ba563f1ef3d.mockapi.io/users", {
+          email: email,
+          password: password,
+        })
+        .then((response) => {
+          console.log(response.data);
+          swal2.fire({
+            title: "Usuario registrado",
+            text: "Usuario registrado correctamente",
+            icon: "success",
+            confirmButtonText: "Aceptar",
+          });
+        });
+    } else {
+      swal2.fire({
+        title: "Error",
         text: "Las contraseñas no coinciden",
-      });
-      return;
-    }
-
-    const users = JSON.parse(localStorage.getItem("users"));
-    const user = users.find((user) => user.email === email);
-    if (user) {
-      swal2.fire({
         icon: "error",
-        title: "Oops...",
-        text: "El usuario ya existe",
+        confirmButtonText: "Aceptar",
       });
-      return;
     }
-
-    const newUser = {
-      email,
-      password,
-    };
-
-    users.push(newUser);
-    localStorage.setItem("users", JSON.stringify(users));
-
-    swal2.fire({
-      icon: "success",
-      title: "Bienvenido",
-      text: "Te has registrado correctamente",
-    });
-    window.location.href = "/";
   };
 
   return (
@@ -111,7 +103,7 @@ const Register = () => {
                 <input
                   type="password"
                   name="confirmPassword"
-                  id="confirmPassword"
+                  id="confirmPasswordLogin"
                   className="form-control mt-2"
                   aria-describedby="emailHelp"
                   placeholder="Confirm Password"
