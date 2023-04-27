@@ -68,7 +68,20 @@ const CartPage = () => {
 
   const updateQuantity = async (id, quantity) => {
     if (quantity < 1) {
-      quantity = 1;
+      swal2.fire({
+        title: "La cantidad no puede ser menor a 1",
+        icon: "warning",
+        confirmButtonText: "Ok",
+      });
+      return;
+    }
+    if (quantity > 50) {
+      swal2.fire({
+        title: "La cantidad no puede ser mayor a 50",
+        icon: "warning",
+        confirmButtonText: "Ok",
+      });
+      return;
     }
     try {
       await axios.put(
