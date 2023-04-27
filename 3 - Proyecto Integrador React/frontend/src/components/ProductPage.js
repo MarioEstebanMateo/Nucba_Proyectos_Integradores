@@ -73,21 +73,25 @@ const ProductPage = () => {
       </div>
       <div className="product-page__info">
         <h1>{product.title}</h1>
-        <p>{product.description}</p>
+        <p className="product-page__info__description">{product.description}</p>
         <p className="product-page__price">Price: ${product.price}</p>
         <div className="product-page__quantity">
           <label htmlFor="quantity">Quantity</label>
           <input
+            className="mx-2"
             type="number"
             id="quantity"
             name="quantity"
             min="1"
-            max="10"
+            max="50"
             value={quantity}
             onChange={(e) => setQuantity(e.target.value)}
           />
         </div>
-        <button className="product-page__button" onClick={addToCart}>
+        <button
+          className="product-page__button btn btn-primary mt-3"
+          onClick={addToCart}
+        >
           Add to cart
         </button>
       </div>
