@@ -29,12 +29,12 @@ const CartPage = () => {
     try {
       swal2
         .fire({
-          title: "Are you sure?",
-          text: "You will delete this item from your cart",
+          title: "Esta seguro?",
+          text: "No podra recuperar el producto!",
           icon: "warning",
           showCancelButton: true,
-          confirmButtonText: "Yes, delete it!",
-          cancelButtonText: "No, keep it",
+          confirmButtonText: "Si, eliminarlo!",
+          cancelButtonText: "No, cancelar!",
         })
         .then(async (result) => {
           if (result.isConfirmed) {
@@ -42,9 +42,9 @@ const CartPage = () => {
               `https://643a093390cd4ba563f1ef3d.mockapi.io/cart/${id}`
             );
             getCart();
-            swal2.fire("Deleted!", "Your item has been deleted.", "success");
+            swal2.fire("Su producto ha sido eliminado!", "", "success");
           } else if (result.dismiss === swal2.DismissReason.cancel) {
-            swal2.fire("Cancelled", "Your item is safe :)", "error");
+            swal2.fire("Cancelado", "Su producto esta a salvo :)", "error");
           }
         });
     } catch (error) {
@@ -86,16 +86,16 @@ const CartPage = () => {
   const checkout = () => {
     if (cart.length === 0) {
       swal2.fire({
-        title: "Your cart is empty",
-        text: "Please add some items to your cart",
+        title: "Su carrito esta vacio",
+        text: "Por favor agregue algunos productos a su carrito",
         icon: "warning",
         confirmButtonText: "Ok",
       });
     } else {
       swal2
         .fire({
-          title: "Checkout",
-          text: `Your total is $${cart.reduce(
+          title: "Finalizar compra",
+          text: `Su compra se realizo con exito! Total: $${cart.reduce(
             (acc, item) => acc + item.price * item.quantity,
             0
           )}`,
@@ -112,27 +112,27 @@ const CartPage = () => {
   const emptyCart = () => {
     if (cart.length === 0) {
       swal2.fire({
-        title: "Your cart is empty",
-        text: "Please add some items to your cart",
+        title: "Su carrito esta vacio",
+        text: "Por favor agregue algunos productos a su carrito",
         icon: "warning",
         confirmButtonText: "Ok",
       });
     } else {
       swal2
         .fire({
-          title: "Are you sure?",
-          text: "You will empty your cart",
+          title: "Esta seguro?",
+          text: "No podra recuperar los productos!",
           icon: "warning",
           showCancelButton: true,
-          confirmButtonText: "Yes, empty it!",
-          cancelButtonText: "No, keep it",
+          confirmButtonText: "Si, vaciarlo",
+          cancelButtonText: "No, cancelar",
         })
         .then((result) => {
           if (result.isConfirmed) {
             deleteAllFromCart();
-            swal2.fire("Deleted!", "Your cart has been emptied.", "success");
+            swal2.fire("Su carrito ha sido vaciado!", "", "success");
           } else if (result.dismiss === swal2.DismissReason.cancel) {
-            swal2.fire("Cancelled", "Your cart is safe :)", "error");
+            swal2.fire("Cancelado", "Su carrito esta a salvo :)", "error");
           }
         });
     }
@@ -149,9 +149,9 @@ const CartPage = () => {
         <thead className="tableHead">
           <tr>
             <th scope="col"></th>
-            <th scope="col">Product</th>
-            <th scope="col">Quantity</th>
-            <th scope="col">Price</th>
+            <th scope="col">Producto</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Precio</th>
             <th scope="col">Subtotal</th>
             <th scope="col"></th>
           </tr>
@@ -181,7 +181,7 @@ const CartPage = () => {
                   className="btn btn-danger"
                   onClick={() => deleteFromCart(item.id)}
                 >
-                  Delete <i className="fas fa-trash-alt"></i>
+                  Borrar <i className="fas fa-trash-alt"></i>
                 </button>
               </td>
             </tr>
@@ -195,13 +195,13 @@ const CartPage = () => {
         </h3>
         <div className="totalButtons">
           <button className="btn btn-primary" onClick={checkout}>
-            Checkout
+            Finalizar Compra
           </button>
           <button className="btn btn-danger" onClick={emptyCart}>
-            Empty Cart
+            Vaciar Carrito
           </button>
           <button className="btn btn-success" onClick={continueShopping}>
-            Continue Shopping
+            Continuar Comprando
           </button>
         </div>
       </div>

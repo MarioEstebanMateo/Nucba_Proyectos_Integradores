@@ -28,8 +28,6 @@ const ProductPage = () => {
     getProduct();
   }, []);
 
-  // Add to cart function and check if the product is already in the cart
-
   const addToCart = async () => {
     try {
       const cart = await axios.get(
@@ -40,20 +38,39 @@ const ProductPage = () => {
         swal2.fire({
           icon: "error",
           title: "Oops...",
-          text: "Product already in cart!",
+          text: "El producto ya esta en el carrito!",
         });
       } else {
+        if (quantity < 1) {
+          swal2
+            .fire({
+              icon: "error",
+              title: "Oops...",
+              text: "La cantidad no puede ser menor a 1!",
+            })
+            .then(() => {
+              setQuantity(1);
+            });
+          return;
+        }
+        if (quantity > 50) {
+          swal2.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "La cantidad no puede ser mayor a 50!",
+          });
+          return;
+        }
         await axios.post("https://643a093390cd4ba563f1ef3d.mockapi.io/cart", {
           ...product,
           quantity: quantity,
         });
-        // go to cart page or continue shopping
         const { isConfirmed } = await swal2.fire({
           icon: "success",
-          title: "Product added to cart!",
+          title: "Producto agregado al carrito!",
           showCancelButton: true,
-          confirmButtonText: "Go to cart",
-          cancelButtonText: "Continue shopping",
+          confirmButtonText: "Ir al carrito",
+          cancelButtonText: "Continuar comprando",
         });
         if (isConfirmed) {
           navigate("/cart");
@@ -74,9 +91,9 @@ const ProductPage = () => {
       <div className="product-page__info">
         <h1>{product.title}</h1>
         <p className="product-page__info__description">{product.description}</p>
-        <p className="product-page__price">Price: ${product.price}</p>
+        <p className="product-page__price">Precio: ${product.price}</p>
         <div className="product-page__quantity">
-          <label htmlFor="quantity">Quantity</label>
+          <label htmlFor="quantity">Cantidad</label>
           <input
             className="mx-2"
             type="number"
@@ -92,7 +109,7 @@ const ProductPage = () => {
           className="product-page__button btn btn-primary mt-3"
           onClick={addToCart}
         >
-          Add to cart
+          Agregar al carrito
         </button>
       </div>
     </div>
