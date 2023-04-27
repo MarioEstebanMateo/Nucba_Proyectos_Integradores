@@ -94,8 +94,8 @@ const CartPage = () => {
     } else {
       swal2
         .fire({
-          title: "Finalizar compra",
-          text: `Su compra se realizo con exito! Total: $${cart.reduce(
+          title: "Compra Finalizada!",
+          text: `Su compra se realizo con exito! Muchas gracias por confiar en nosotros! El Total a pagar es: $${cart.reduce(
             (acc, item) => acc + item.price * item.quantity,
             0
           )}`,

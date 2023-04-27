@@ -33,13 +33,19 @@ const ProductPage = () => {
       const cart = await axios.get(
         "https://643a093390cd4ba563f1ef3d.mockapi.io/cart"
       );
-      const productInCart = cart.data.find((item) => item.id === product.id);
+      const productInCart = cart.data.find(
+        (product) => product.productId === params.id
+      );
       if (productInCart) {
-        swal2.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "El producto ya esta en el carrito!",
-        });
+        swal2
+          .fire({
+            icon: "error",
+            title: "Oops...",
+            text: "El producto ya esta en el carrito!",
+          })
+          .then(() => {
+            navigate("/");
+          });
       } else {
         if (quantity < 1) {
           swal2
@@ -62,8 +68,11 @@ const ProductPage = () => {
           return;
         }
         await axios.post("https://643a093390cd4ba563f1ef3d.mockapi.io/cart", {
-          ...product,
+          productId: params.id,
+          imageUrl: product.imageUrl,
+          title: product.title,
           quantity: quantity,
+          price: product.price,
         });
         const { isConfirmed } = await swal2.fire({
           icon: "success",
