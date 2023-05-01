@@ -16,7 +16,7 @@ const ProductPage = () => {
   const getProduct = async () => {
     try {
       const product = await axios.get(
-        `https://643a093390cd4ba563f1ef3d.mockapi.io/products/${params.id}`
+        `http://localhost:8000/api/products/${params.id}`
       );
       setProduct(product.data);
     } catch (error) {
@@ -30,9 +30,7 @@ const ProductPage = () => {
 
   const addToCart = async () => {
     try {
-      const cart = await axios.get(
-        "https://643a093390cd4ba563f1ef3d.mockapi.io/cart"
-      );
+      const cart = await axios.get("http://localhost:8000/api/cart");
       const productInCart = cart.data.find(
         (product) => product.productId === params.id
       );
@@ -67,7 +65,7 @@ const ProductPage = () => {
           });
           return;
         }
-        await axios.post("https://643a093390cd4ba563f1ef3d.mockapi.io/cart", {
+        await axios.post("http://localhost:8000/api/cart", {
           productId: params.id,
           imageUrl: product.imageUrl,
           title: product.title,

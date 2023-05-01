@@ -10,12 +10,10 @@ const Home = () => {
   const [search, setSearch] = React.useState("");
 
   const getProducts = async () => {
-    await axios
-      .get("https://643a093390cd4ba563f1ef3d.mockapi.io/products")
-      .then((response) => {
-        setProducts(response.data);
-        console.log(response.data);
-      });
+    await axios.get("http://localhost:8000/api/products").then((response) => {
+      setProducts(response.data);
+      console.log(response.data);
+    });
   };
 
   const handleChange = (e) => {
@@ -25,7 +23,7 @@ const Home = () => {
   const filteredProducts = async () => {
     await axios
       .get(
-        `https://643a093390cd4ba563f1ef3d.mockapi.io/products?search=${search}`
+        `http://localhost:8000/api/products?title=${search}&description=${search}&price=${search}`
       )
       .then((response) => {
         setProducts(response.data);
@@ -70,8 +68,8 @@ const Home = () => {
 
       <h3>Nuestros Productos</h3>
       <div className="card-container row">
-        {products.map((product) => (
-          <div className="col" key={product.id}>
+        {products.map((product, index) => (
+          <div className="col" key={index}>
             <div className="card">
               <div className="imgContainer">
                 <img src={product.imageUrl} className="card-imgUrl" alt="..." />
@@ -86,7 +84,7 @@ const Home = () => {
                 <p>${product.price}</p>
               </div>
               <div className="card-button">
-                <Link to={`/product/${product.id}`}>
+                <Link to={`/product/${product._id}`}>
                   <button className="btn btn-primary">Ver más</button>
                 </Link>
               </div>

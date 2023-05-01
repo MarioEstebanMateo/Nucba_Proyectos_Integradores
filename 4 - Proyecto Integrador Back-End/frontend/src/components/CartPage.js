@@ -12,9 +12,7 @@ const CartPage = () => {
 
   const getCart = async () => {
     try {
-      const cart = await axios.get(
-        "https://643a093390cd4ba563f1ef3d.mockapi.io/cart"
-      );
+      const cart = await axios.get("http://localhost:8000/api/cart");
       setCart(cart.data);
     } catch (error) {
       console.log(error);
@@ -38,9 +36,7 @@ const CartPage = () => {
         })
         .then(async (result) => {
           if (result.isConfirmed) {
-            await axios.delete(
-              `https://643a093390cd4ba563f1ef3d.mockapi.io/cart/${id}`
-            );
+            await axios.delete(`http://localhost:8000/api/cart/${id}`);
             getCart();
             swal2.fire("Su producto ha sido eliminado!", "", "success");
           } else if (result.dismiss === swal2.DismissReason.cancel) {
@@ -56,9 +52,7 @@ const CartPage = () => {
     const cartLength = cart.length;
     try {
       for (let i = 0; i < cartLength; i++) {
-        await axios.delete(
-          `https://643a093390cd4ba563f1ef3d.mockapi.io/cart/${cart[i].id}`
-        );
+        await axios.delete(`http://localhost:8000/apicart/${cart[i].id}`);
       }
       getCart();
     } catch (error) {
@@ -84,12 +78,9 @@ const CartPage = () => {
       return;
     }
     try {
-      await axios.put(
-        `https://643a093390cd4ba563f1ef3d.mockapi.io/cart/${id}`,
-        {
-          quantity: quantity,
-        }
-      );
+      await axios.put(`http://localhost:8000/api/cart/${id}`, {
+        quantity: quantity,
+      });
       getCart();
     } catch (error) {
       console.log(error);
@@ -170,8 +161,8 @@ const CartPage = () => {
           </tr>
         </thead>
         <tbody>
-          {cart.map((item) => (
-            <tr key={item.id}>
+          {cart.map((item, index) => (
+            <tr key={index}>
               <td>
                 <img
                   className="imgTable"
@@ -184,7 +175,7 @@ const CartPage = () => {
                 <input
                   type="number"
                   value={item.quantity}
-                  onChange={(e) => updateQuantity(item.id, e.target.value)}
+                  onChange={(e) => updateQuantity(item._id, e.target.value)}
                 />
               </td>
               <td>${item.price}</td>
@@ -192,7 +183,7 @@ const CartPage = () => {
               <td>
                 <button
                   className="btn btn-danger"
-                  onClick={() => deleteFromCart(item.id)}
+                  onClick={() => deleteFromCart(item._id)}
                 >
                   Borrar <i className="fas fa-trash-alt"></i>
                 </button>
