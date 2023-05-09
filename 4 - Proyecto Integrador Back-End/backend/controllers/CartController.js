@@ -18,6 +18,22 @@ const getProductInCartById = async (req, res) => {
   }
 };
 
+const addProductToCart = async (req, res) => {
+  const newProductInCart = new cart({
+    id: req.body.id,
+    imageUrl: req.body.imageUrl,
+    title: req.body.title,
+    price: req.body.price,
+    quantity: req.body.quantity,
+  });
+  try {
+    const productInCart = await newProductInCart.save();
+    res.status(201).json(productInCart);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
 const deleteProductInCart = async (req, res) => {
   try {
     const productInCart = await cart.findByIdAndDelete(req.params.id);
@@ -39,6 +55,7 @@ const deleteAllProductsInCart = async (req, res) => {
 module.exports = {
   getAllProductsInCart,
   getProductInCartById,
+  addProductToCart,
   deleteProductInCart,
   deleteAllProductsInCart,
 };

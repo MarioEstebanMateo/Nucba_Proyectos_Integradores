@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import swal2 from "sweetalert2";
 
 import "./Home.css";
 import mainImage from "../img/mainImage3.jpg";
@@ -8,37 +9,48 @@ import mainImage from "../img/mainImage3.jpg";
 const Home = () => {
   const [products, setProducts] = React.useState([]);
   const [search, setSearch] = React.useState("");
+  const [searchResults, setSearchResults] = React.useState([]);
 
   const getProducts = async () => {
-    await axios.get("http://localhost:8000/api/products").then((response) => {
-      setProducts(response.data);
-      console.log(response.data);
-    });
-  };
-
-  const handleChange = (e) => {
-    setSearch(e.target.value);
-  };
-
-  const filteredProducts = async () => {
-    await axios
-      .get(
-        `http://localhost:8000/api/products?title=${search}&description=${search}&price=${search}`
-      )
-      .then((response) => {
-        setProducts(response.data);
-        console.log(response.data);
-      });
-  };
-
-  const searchButton = (e) => {
-    e.preventDefault();
-    filteredProducts();
+    try {
+      const products = await axios.get("http://localhost:8000/api/products");
+      setProducts(products.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
     getProducts();
   }, []);
+
+  const handleChange = (e) => {
+    setSearch(e.target.value);
+  };
+
+  const searchButton = (e) => {
+    e.preventDefault();
+    const results = products.filter((product) =>
+      product.title.toLowerCase().includes(search.toLowerCase())
+    );
+    setSearchResults(results);
+    console.log(results);
+
+    if (results.length === 0) {
+      swal2
+        .fire({
+          title: "Error",
+          text: "No se encontraron resultados",
+          icon: "error",
+          confirmButtonText: "Aceptar",
+        })
+        .then(() => {
+          setSearch("");
+        });
+    } else {
+      setProducts(results);
+    }
+  };
 
   return (
     <div className="container-fluid">
