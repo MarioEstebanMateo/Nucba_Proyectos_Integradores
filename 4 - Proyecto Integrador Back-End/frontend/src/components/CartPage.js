@@ -12,7 +12,7 @@ const CartPage = () => {
 
   const getCart = async () => {
     try {
-      const cart = await axios.get("http://localhost:8000/api/cart");
+      const cart = await axios.get("http://localhost:8000/api/carts");
       setCart(cart.data);
     } catch (error) {
       console.log(error);
@@ -36,11 +36,15 @@ const CartPage = () => {
         })
         .then(async (result) => {
           if (result.isConfirmed) {
-            await axios.delete(`http://localhost:8000/api/cart/${id}`);
+            await axios.delete(`http://localhost:8000/api/carts/${id}`);
+            swal2.fire(
+              "Eliminado!",
+              "El producto ha sido eliminado.",
+              "success"
+            );
             getCart();
-            swal2.fire("Su producto ha sido eliminado!", "", "success");
           } else if (result.dismiss === swal2.DismissReason.cancel) {
-            swal2.fire("Cancelado", "Su producto esta a salvo :)", "error");
+            swal2.fire("Cancelado", "El producto esta a salvo :)", "error");
           }
         });
     } catch (error) {
@@ -52,7 +56,7 @@ const CartPage = () => {
     const cartLength = cart.length;
     try {
       for (let i = 0; i < cartLength; i++) {
-        await axios.delete(`http://localhost:8000/apicart/${cart[i].id}`);
+        await axios.delete(`http://localhost:8000/api/carts/${cart[i]._id}`);
       }
       getCart();
     } catch (error) {
@@ -78,7 +82,7 @@ const CartPage = () => {
       return;
     }
     try {
-      await axios.put(`http://localhost:8000/api/cart/${id}`, {
+      await axios.put(`http://localhost:8000/api/carts/${id}`, {
         quantity: quantity,
       });
       getCart();
@@ -87,7 +91,7 @@ const CartPage = () => {
     }
   };
 
-  const checkout = () => {
+  const checkout = async () => {
     if (cart.length === 0) {
       swal2.fire({
         title: "Su carrito esta vacio",
@@ -134,9 +138,9 @@ const CartPage = () => {
         .then((result) => {
           if (result.isConfirmed) {
             deleteAllFromCart();
-            swal2.fire("Su carrito ha sido vaciado!", "", "success");
+            swal2.fire("Eliminado!", "El carrito ha sido vaciado.", "success");
           } else if (result.dismiss === swal2.DismissReason.cancel) {
-            swal2.fire("Cancelado", "Su carrito esta a salvo :)", "error");
+            swal2.fire("Cancelado", "El carrito esta a salvo :)", "error");
           }
         });
     }

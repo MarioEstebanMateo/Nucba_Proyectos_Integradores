@@ -36,7 +36,7 @@ const Home = () => {
     setSearchResults(results);
     console.log(results);
 
-    if (results.length === 0) {
+    if (results.length === 0 || search === "") {
       swal2
         .fire({
           title: "Error",
@@ -46,6 +46,8 @@ const Home = () => {
         })
         .then(() => {
           setSearch("");
+
+          getProducts();
         });
     } else {
       setProducts(results);

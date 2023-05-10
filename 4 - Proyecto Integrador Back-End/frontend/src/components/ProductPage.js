@@ -30,7 +30,7 @@ const ProductPage = () => {
 
   const addToCart = async () => {
     try {
-      const cart = await axios.get("http://localhost:8000/api/cart");
+      const cart = await axios.get("http://localhost:8000/api/carts");
       const productInCart = cart.data.find(
         (product) => product.productId === params.id
       );
@@ -65,12 +65,11 @@ const ProductPage = () => {
           });
           return;
         }
-        await axios.post("http://localhost:8000/api/cart", {
-          productId: params.id,
-          imageUrl: product.imageUrl,
+        await axios.post("http://localhost:8000/api/carts", {
           title: product.title,
-          quantity: quantity,
           price: product.price,
+          imageUrl: product.imageUrl,
+          quantity: quantity,
         });
         const { isConfirmed } = await swal2.fire({
           icon: "success",
