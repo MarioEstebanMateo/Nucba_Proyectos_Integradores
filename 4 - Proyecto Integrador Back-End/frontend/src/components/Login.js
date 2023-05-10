@@ -9,14 +9,6 @@ import "./Login.css";
 const Login = () => {
   const navigate = useNavigate();
 
-  const getUsers = async () => {
-    await axios
-      .get("https://643a093390cd4ba563f1ef3d.mockapi.io/users")
-      .then((response) => {
-        console.log(response.data);
-      });
-  };
-
   const login = async (e) => {
     e.preventDefault();
     const email = document.getElementById("emailLogin").value;
@@ -41,45 +33,43 @@ const Login = () => {
         confirmButtonText: "Aceptar",
       });
     } else {
-      await axios
-        .get("https://643a093390cd4ba563f1ef3d.mockapi.io/users")
-        .then((response) => {
-          console.log(response.data);
-          const users = response.data;
-          const user = users.filter((user) => user.email === email);
+      await axios.get("http://localhost:8000/api/users").then((response) => {
+        console.log(response.data);
+        const users = response.data;
+        const user = users.filter((user) => user.email === email);
 
-          if (user.length > 0) {
-            if (user[0].password === password) {
-              swal2
-                .fire({
-                  title: "Bienvenido",
-                  text: "Usuario logueado correctamente",
-                  icon: "success",
-                  confirmButtonText: "Aceptar",
-                })
-                .then(() => {
-                  navigate("/");
-                });
-              //limpiar el formulario
-              document.getElementById("emailLogin").value = "";
-              document.getElementById("passwordLogin").value = "";
-            } else {
-              swal2.fire({
-                title: "Error",
-                text: "Contraseña incorrecta",
-                icon: "error",
+        if (user.length > 0) {
+          if (user[0].password === password) {
+            swal2
+              .fire({
+                title: "Bienvenido",
+                text: "Usuario logueado correctamente",
+                icon: "success",
                 confirmButtonText: "Aceptar",
+              })
+              .then(() => {
+                navigate("/");
               });
-            }
+            //limpiar el formulario
+            document.getElementById("emailLogin").value = "";
+            document.getElementById("passwordLogin").value = "";
           } else {
             swal2.fire({
               title: "Error",
-              text: "El usuario no existe",
+              text: "Contraseña incorrecta",
               icon: "error",
               confirmButtonText: "Aceptar",
             });
           }
-        });
+        } else {
+          swal2.fire({
+            title: "Error",
+            text: "El usuario no existe",
+            icon: "error",
+            confirmButtonText: "Aceptar",
+          });
+        }
+      });
     }
   };
 

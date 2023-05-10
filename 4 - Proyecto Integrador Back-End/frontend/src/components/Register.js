@@ -2,10 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import swal2 from "sweetalert2";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 import "./Register.css";
 
 const Register = () => {
+  const navigate = useNavigate();
+
   const register = async (e) => {
     e.preventDefault();
     const email = document.getElementById("emailLogin").value;
@@ -34,27 +37,58 @@ const Register = () => {
       });
     }
     //validar que las contraseñas sean iguales
-    else if (password === confirmPassword) {
-      await axios
-        .post("https://643a093390cd4ba563f1ef3d.mockapi.io/users", {
-          email: email,
-          password: password,
-        })
-        .then((response) => {
-          console.log(response.data);
-          swal2.fire({
-            title: "Usuario registrado",
-            text: "Usuario registrado correctamente",
-            icon: "success",
-            confirmButtonText: "Aceptar",
-          });
-        });
-    } else {
+    else if (password !== confirmPassword) {
       swal2.fire({
         title: "Error",
         text: "Las contraseñas no coinciden",
         icon: "error",
         confirmButtonText: "Aceptar",
+      });
+    }
+    //validar que el email no este registrado
+    else {
+      await axios.get("http://localhost:8000/api/users").then((response) => {
+        console.log(response.data);
+        const users = response.data;
+        const user = users.filter((user) => user.email === email);
+
+        if (user.length > 0) {
+          swal2
+            .fire({
+              title: "Error",
+              text: "El email ya esta registrado",
+              icon: "error",
+              confirmButtonText: "Aceptar",
+            })
+            .then(() => {
+              document.getElementById("emailLogin").value = "";
+              document.getElementById("passwordLogin").value = "";
+              document.getElementById("confirmPasswordLogin").value = "";
+              navigate("/login");
+            });
+        } else {
+          axios
+            .post("http://localhost:8000/api/users", {
+              email: email,
+              password: password,
+            })
+            .then((response) => {
+              console.log(response);
+              swal2
+                .fire({
+                  title: "Usuario registrado",
+                  text: "Usuario registrado correctamente",
+                  icon: "success",
+                  confirmButtonText: "Aceptar",
+                })
+                .then(() => {
+                  navigate("/login");
+                });
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
       });
     }
   };

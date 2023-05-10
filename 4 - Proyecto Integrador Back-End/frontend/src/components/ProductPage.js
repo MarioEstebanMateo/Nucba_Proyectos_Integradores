@@ -7,11 +7,12 @@ import { useParams } from "react-router-dom";
 import "./ProductPage.css";
 
 const ProductPage = () => {
-  const [product, setProduct] = React.useState({});
   const [quantity, setQuantity] = React.useState(1);
   const params = useParams();
   console.log(params);
   const navigate = useNavigate();
+
+  const [product, setProduct] = React.useState([]);
 
   const getProduct = async () => {
     try {
@@ -28,62 +29,36 @@ const ProductPage = () => {
     getProduct();
   }, []);
 
+  const handleChange = (e) => {
+    setQuantity(e.target.value);
+  };
+
   const addToCart = async () => {
     try {
-      const cart = await axios.get("http://localhost:8000/api/carts");
-      const productInCart = cart.data.find(
-        (product) => product.productId === params.id
-      );
-      if (productInCart) {
-        swal2
-          .fire({
-            icon: "error",
-            title: "Oops...",
-            text: "El producto ya esta en el carrito!",
-          })
-          .then(() => {
-            navigate("/");
-          });
-      } else {
-        if (quantity < 1) {
-          swal2
-            .fire({
-              icon: "error",
-              title: "Oops...",
-              text: "La cantidad no puede ser menor a 1!",
-            })
-            .then(() => {
-              setQuantity(1);
-            });
-          return;
-        }
-        if (quantity > 50) {
-          swal2.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "La cantidad no puede ser mayor a 50!",
-          });
-          return;
-        }
-        await axios.post("http://localhost:8000/api/carts", {
-          title: product.title,
-          price: product.price,
-          imageUrl: product.imageUrl,
-          quantity: quantity,
-        });
-        const { isConfirmed } = await swal2.fire({
+      await axios.post("http://localhost:8000/api/carts", {
+        productId: product._id,
+        imageUrl: product.imageUrl,
+        title: product.title,
+        price: product.price,
+        quantity: quantity,
+      });
+      //swal2 producto agregado al carrito o continuar comprando
+      swal2
+        .fire({
+          title: "Producto agregado al carrito",
+          text: "¿Desea continuar comprando?",
           icon: "success",
-          title: "Producto agregado al carrito!",
           showCancelButton: true,
-          confirmButtonText: "Ir al carrito",
-          cancelButtonText: "Continuar comprando",
+          confirmButtonText: "Si, continuar comprando",
+          cancelButtonText: "No, ir al carrito",
+        })
+        .then((result) => {
+          if (result.isConfirmed) {
+            navigate("/");
+          } else if (result.dismiss === swal2.DismissReason.cancel) {
+            navigate("/cart");
+          }
         });
-        if (isConfirmed) {
-          navigate("/cart");
-        } else {
-          navigate("/");
-        }
-      }
     } catch (error) {
       console.log(error);
     }
@@ -108,7 +83,7 @@ const ProductPage = () => {
             min="1"
             max="50"
             value={quantity}
-            onChange={(e) => setQuantity(e.target.value)}
+            onChange={handleChange}
           />
         </div>
         <button
